@@ -71,7 +71,6 @@
   .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--series-1),#1d5aa8);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .brand{font-size:16px;font-weight:700}
   .brand small{font-weight:400;color:var(--ink-3);font-size:12px;margin-left:6px}
-  .badge{margin-left:auto;font-size:11.5px;color:var(--ink-2);border:1px solid var(--hairline);border-radius:999px;padding:4px 12px;white-space:nowrap;background:var(--page-2)}
   /* ---------- 通用按钮 ---------- */
   button.btn{border:none;border-radius:11px;padding:12px 26px;font-size:15px;font-weight:600;cursor:pointer;background:var(--series-1);color:#fff;transition:filter .15s,transform .15s}
   button.btn:hover:not(:disabled){filter:brightness(1.07)}
@@ -271,12 +270,11 @@
   <div class="topbar-inner">
     <div class="logo">税</div>
     <div class="brand">平台报税向导<small>Platform Tax Guide</small></div>
-    <span class="badge">模拟数据演示</span>
   </div>
 </header>
 <main id="app"></main>
 <footer class="foot">
-  免责声明：本工具提供一般性测算与政策提示，不构成税务咨询意见；具体申报请以主管税务机关口径及申报时现行政策为准。所有案例与数据均为模拟数据。
+  免责声明：本工具提供一般性测算与政策提示，不构成税务咨询意见；具体申报请以主管税务机关口径及申报时现行政策为准。预置演示案例及其数据均为模拟数据。
 </footer>
 <script>
 "use strict";
@@ -419,7 +417,7 @@ function renderHome(){
       <p class="hero-sub">回答 8 个问题判定收入性质，双路径测算年度税负，得到合规申报路径与风险提示——几分钟看清自己的税务处境。</p>
       <div class="hero-cta">
         <button class="btn btn-big" onclick="startManual()">立即开始判定</button>
-        <span class="hero-hint">约 3 分钟 · 无需注册 · 全部为模拟数据</span>
+        <span class="hero-hint">约 3 分钟 · 无需注册 · 按你的真实情况作答</span>
       </div>
     </div>
   </section>
@@ -455,7 +453,7 @@ function renderHome(){
   </section>
   <section class="band">
     <div class="band-inner">
-      <div class="band-head"><span class="band-num">03</span><h2>选择演示案例</h2><em>四个典型场景 · 点击查看判定与测算</em></div>
+      <div class="band-head"><span class="band-num">03</span><h2>选择演示案例</h2><em>四个典型场景 · 案例均为模拟数据 · 点击查看判定与测算</em></div>
       <div class="grid">${cards}</div>
       <p class="case-foot">想看自己情况的判定？<a onclick="startManual()">点击这里从空白逐题开始 →</a></p>
     </div>
