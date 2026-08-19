@@ -7,126 +7,216 @@
 <style>
   :root{
     color-scheme: light;
-    --page:#f6f6f4;
+    --page:#edf0f5;        /* 页面底：浅灰蓝，让白色卡片浮起来 */
+    --page-2:#f4f6fa;      /* 次级分区底 */
     --card:#ffffff;
-    --ink-1:#111111;
-    --ink-2:#5a5a55;
-    --ink-3:#8c8c85;
-    --hairline:#e6e6e0;
+    --ink-1:#141b28;
+    --ink-2:#4b5567;
+    --ink-3:#8791a4;
+    --hairline:#e3e8f0;
     --series-1:#2a78d6;
     --series-2:#eb6834;
     --st-good:#0ca30c;
     --st-warn:#fab219;
     --st-serious:#ec835a;
     --st-crit:#d03b3b;
-    --tint-1:rgba(42,120,214,.08);
+    --tint-1:rgba(42,120,214,.09);
+    --tint-2:rgba(75,85,103,.09);
+    --tint-orange:rgba(235,104,52,.11);
+    --tint-good:rgba(12,163,12,.10);
+    --tint-warn:rgba(250,178,25,.16);
+    --tint-serious:rgba(236,131,90,.14);
+    --tint-crit:rgba(208,59,59,.10);
+    --navy-1:#0c1a2f;
+    --navy-2:#17345c;
+    --shadow:0 1px 2px rgba(19,26,38,.05),0 4px 16px rgba(19,26,38,.06);
+    --shadow-lg:0 16px 40px rgba(19,26,38,.18);
   }
   @media (prefers-color-scheme: dark){
     :root{
       color-scheme: dark;
-      --page:#0d0d0d;
-      --card:#1a1a19;
-      --ink-1:#f5f5f2;
-      --ink-2:#c3c2b7;
-      --ink-3:#898781;
-      --hairline:#2c2c2a;
+      --page:#0a0d13;
+      --page-2:#10151f;
+      --card:#161d29;
+      --ink-1:#eef2f8;
+      --ink-2:#b7c1d0;
+      --ink-3:#7d889d;
+      --hairline:#253045;
       --series-1:#3987e5;
       --series-2:#d95926;
-      --tint-1:rgba(57,135,229,.14);
+      --tint-1:rgba(57,135,229,.16);
+      --tint-2:rgba(183,193,208,.13);
+      --tint-orange:rgba(217,89,38,.16);
+      --tint-good:rgba(12,163,12,.16);
+      --tint-warn:rgba(250,178,25,.16);
+      --tint-serious:rgba(236,131,90,.16);
+      --tint-crit:rgba(208,59,59,.16);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);
+      --shadow-lg:0 16px 40px rgba(0,0,0,.5);
     }
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
   body{
     font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--page);color:var(--ink-1);line-height:1.65;
+    background:var(--page);
+    color:var(--ink-1);line-height:1.65;
     min-height:100vh;display:flex;flex-direction:column;
   }
   a{color:var(--series-1)}
-  header.topbar{border-bottom:1px solid var(--hairline);background:var(--card)}
-  .topbar-inner{max-width:680px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px}
-  .logo{width:26px;height:26px;border-radius:7px;background:var(--series-1);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  /* ---------- 顶栏 ---------- */
+  header.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline)}
+  @media (prefers-color-scheme: dark){ header.topbar{background:rgba(10,13,19,.82)} }
+  .topbar-inner{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px}
+  .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--series-1),#1d5aa8);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .brand{font-size:16px;font-weight:700}
   .brand small{font-weight:400;color:var(--ink-3);font-size:12px;margin-left:6px}
-  .badge{margin-left:auto;font-size:11.5px;color:var(--ink-2);border:1px solid var(--hairline);border-radius:999px;padding:3px 10px;white-space:nowrap}
-  main.wrap{max-width:680px;margin:0 auto;padding:28px 20px 60px;width:100%;flex:1}
-  footer.foot{border-top:1px solid var(--hairline);background:var(--card);padding:12px 20px;font-size:12px;color:var(--ink-3);text-align:center}
-  h1{font-size:26px;line-height:1.35;margin:10px 0 8px;letter-spacing:-.01em}
-  h2{font-size:17px;margin:0 0 12px}
-  .sub{color:var(--ink-2);font-size:15px;margin-bottom:22px}
-  .kicker{display:inline-block;font-size:12.5px;font-weight:600;color:var(--series-1);background:var(--tint-1);border-radius:6px;padding:4px 10px}
-  .stats{display:flex;gap:0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:14px 0;margin:0 0 14px}
-  .stat{flex:1;text-align:center;padding:0 8px}
-  .stat + .stat{border-left:1px solid var(--hairline)}
-  .s-num{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
-  .s-cap{font-size:11.5px;color:var(--ink-3);margin-top:2px}
-  .flow{font-size:13px;color:var(--ink-3);margin-bottom:26px}
-  .flow b{color:var(--ink-2);font-weight:600}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media (max-width:560px){.grid{grid-template-columns:1fr}}
-  .case-card{background:var(--card);border:1px solid var(--hairline);border-radius:14px;padding:16px 18px;cursor:pointer;transition:border-color .15s,transform .15s,box-shadow .15s}
-  .case-card:hover{border-color:var(--series-1);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.06)}
-  .cc-head{font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-  .cc-arrow{color:var(--ink-3);transition:transform .15s,color .15s}
+  .badge{margin-left:auto;font-size:11.5px;color:var(--ink-2);border:1px solid var(--hairline);border-radius:999px;padding:4px 12px;white-space:nowrap;background:var(--page-2)}
+  /* ---------- 通用按钮 ---------- */
+  button.btn{border:none;border-radius:11px;padding:12px 26px;font-size:15px;font-weight:600;cursor:pointer;background:var(--series-1);color:#fff;transition:filter .15s,transform .15s}
+  button.btn:hover:not(:disabled){filter:brightness(1.07)}
+  button.btn:disabled{opacity:.35;cursor:not-allowed}
+  button:focus-visible{outline:2px solid var(--series-1);outline-offset:2px}
+  button.btn.ghost{background:transparent;border:1.5px solid var(--hairline);color:var(--ink-1);font-weight:500}
+  button.btn.small{padding:9px 16px;font-size:13.5px}
+  /* ---------- 首页 hero（深色横幅） ---------- */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(140deg,var(--navy-1),var(--navy-2) 70%,#1b4370);color:#fff;padding:64px 20px 52px}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(720px 380px at 78% 12%,#000 0%,transparent 72%);mask-image:radial-gradient(720px 380px at 78% 12%,#000 0%,transparent 72%)}
+  .hero::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(57,135,229,.4),transparent 65%)}
+  .hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+  .hero-kicker{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 15px;margin-bottom:18px}
+  .hero h1{font-size:38px;line-height:1.32;margin:0 0 12px;color:#fff;letter-spacing:-.01em;font-weight:800}
+  .hero-sub{font-size:15px;line-height:1.8;color:rgba(255,255,255,.78);max-width:600px;margin-bottom:24px}
+  .hero-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  button.btn-big{background:#fff;color:var(--navy-1);padding:14px 32px;font-size:16px;font-weight:700;border-radius:13px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
+  button.btn-big:hover:not(:disabled){transform:translateY(-1px);filter:none}
+  .hero-hint{font-size:12.5px;color:rgba(255,255,255,.62)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px;max-width:780px}
+  .stat{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:15px;padding:15px 18px}
+  .s-ico{font-size:22px;line-height:1}
+  .s-num{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff;line-height:1.2}
+  .s-cap{font-size:12px;color:rgba(255,255,255,.66);line-height:1.5}
+  /* ---------- 分区横带 ---------- */
+  .band{padding:46px 20px;background:var(--page)}
+  .band-tint{background:var(--page-2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+  .band-dark{background:linear-gradient(150deg,var(--navy-1),var(--navy-2));color:#fff}
+  .band-inner{max-width:1080px;margin:0 auto}
+  .band-head{display:flex;align-items:baseline;gap:12px;margin-bottom:24px}
+  .band-num{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--series-1);font-variant-numeric:tabular-nums}
+  .band-head h2{font-size:22px;font-weight:800;margin:0}
+  .band-head em{font-style:normal;font-size:12.5px;color:var(--ink-3)}
+  .band-dark .band-head h2{color:#fff}
+  .band-dark .band-num{color:#6ea8ec}
+  .band-foot{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:22px;line-height:1.7}
+  /* ---------- 步骤卡 ---------- */
+  .steps-h{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .sh{background:var(--card);border:1px solid var(--hairline);border-radius:15px;padding:20px 16px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:7px;position:relative}
+  .sh-num{position:absolute;top:-11px;left:16px;background:var(--series-1);color:#fff;font-size:11.5px;font-weight:800;border-radius:999px;padding:2.5px 11px;letter-spacing:.06em}
+  .sh b{font-size:15px}
+  .sh small{font-size:12px;color:var(--ink-3);line-height:1.5}
+  /* ---------- 案例卡 ---------- */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .case-card{background:var(--card);border:1px solid var(--hairline);border-radius:16px;padding:18px;cursor:pointer;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;gap:13px}
+  .case-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .cc-top{display:flex;align-items:center;justify-content:space-between}
+  .cc-ico{width:46px;height:46px;border-radius:13px;background:var(--tint-1);font-size:23px;display:flex;align-items:center;justify-content:center}
+  .cc-arrow{color:var(--ink-3);font-size:17px;transition:transform .15s,color .15s}
   .case-card:hover .cc-arrow{color:var(--series-1);transform:translateX(3px)}
-  .case-card p{font-size:12.5px;color:var(--ink-2)}
-  .case-card.manual{border-style:dashed;background:transparent}
-  .case-banner{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);margin-bottom:14px}
+  .cc-head{font-size:15.5px;font-weight:700;line-height:1.45}
+  .cc-body p{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.6}
+  .cc-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--hairline)}
+  .cc-tag{font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .cc-amt{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .case-card.manual{grid-column:1/-1;border:1.5px dashed var(--hairline);background:transparent;box-shadow:none;flex-direction:row;align-items:center;gap:16px}
+  .case-card.manual:hover{border-color:var(--series-1);background:var(--card)}
+  .case-card.manual .cc-body{flex:1}
+  .case-card.manual .cc-body p{margin-top:2px}
+  /* ---------- 政策要点带（深色） ---------- */
+  .policy-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .ps{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:15px 16px}
+  .ps b{display:block;font-size:14px;color:#fff;margin-bottom:5px}
+  .ps span{font-size:12px;color:rgba(255,255,255,.66);line-height:1.6;display:block}
+  /* ---------- 页面容器（问询/数据/结果） ---------- */
+  .page-pad{padding:28px 20px 64px}
+  .page-col{max-width:860px;margin:0 auto}
+  .case-banner{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);margin-bottom:14px;background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:10px 16px;box-shadow:var(--shadow)}
   .case-banner b{color:var(--ink-1)}
   .case-banner a{cursor:pointer;margin-left:auto;font-size:12.5px}
-  .q-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-  .q-count{font-size:13px;color:var(--ink-2);white-space:nowrap}
-  .pbar{height:5px;border-radius:3px;background:var(--hairline);flex:1;overflow:hidden}
+  .rpt-head{margin-bottom:16px}
+  .data-head{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+  .data-head h2{font-size:21px;margin:0}
+  .data-sub{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+  .sec-ico{width:40px;height:40px;border-radius:12px;background:var(--tint-1);color:var(--series-1);font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  /* ---------- 问询页 ---------- */
+  .q-head{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:0 2px}
+  .q-count{font-size:13px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .q-pct{font-size:12px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .pbar{height:6px;border-radius:3px;background:var(--hairline);flex:1;overflow:hidden}
   .pbar i{display:block;height:100%;background:var(--series-1);border-radius:3px;transition:width .25s}
-  .card{background:var(--card);border:1px solid var(--hairline);border-radius:16px;padding:22px 22px;margin-top:10px;animation:fadein .25s ease}
+  .card{background:var(--card);border:1px solid var(--hairline);border-radius:18px;padding:30px;animation:fadein .25s ease;box-shadow:var(--shadow)}
   @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-  .tag{display:inline-block;font-size:11.5px;color:var(--ink-2);background:var(--page);border:1px solid var(--hairline);border-radius:6px;padding:2px 9px;margin-bottom:12px}
-  .question{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:18px}
-  .opts{display:flex;flex-direction:column;gap:10px}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;border:1.5px solid var(--hairline);border-radius:12px;padding:13px 16px;background:var(--card);cursor:pointer;font-size:15px;text-align:left;color:var(--ink-1);transition:border-color .15s,background .15s}
+  .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:3.5px 11px}
+  .tag-blue{color:var(--series-1);background:var(--tint-1)}
+  .tag-orange{color:var(--series-2);background:var(--tint-orange)}
+  .question{font-size:21px;font-weight:700;line-height:1.55;margin:14px 0 6px}
+  .q-tip{font-size:12.5px;color:var(--ink-3);margin-bottom:18px}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{display:flex;align-items:center;gap:13px;width:100%;border:1.5px solid var(--hairline);border-radius:13px;padding:15px 18px;background:var(--page-2);cursor:pointer;font-size:15px;text-align:left;color:var(--ink-1);transition:border-color .15s,background .15s}
   .opt:hover{border-color:var(--series-1)}
-  .opt .key{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--hairline);font-size:12.5px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+  .opt .key{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--hairline);font-size:13.5px;font-weight:700;color:var(--ink-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--card);transition:all .15s}
   .opt .txt{flex:1}
   .opt .ck{color:var(--series-1);font-weight:700;opacity:0;transition:opacity .15s}
   .opt.sel{border-color:var(--series-1);background:var(--tint-1)}
   .opt.sel .key{background:var(--series-1);border-color:var(--series-1);color:#fff}
   .opt.sel .ck{opacity:1}
-  .nav{display:flex;gap:12px;margin-top:20px}
+  .nav{display:flex;gap:12px;margin-top:24px}
   .nav .spacer{flex:1}
-  button.btn{border:none;border-radius:11px;padding:12px 24px;font-size:15px;font-weight:600;cursor:pointer;background:var(--series-1);color:#fff;transition:filter .15s}
-  button.btn:hover:not(:disabled){filter:brightness(1.07)}
-  button.btn:disabled{opacity:.35;cursor:not-allowed}
-  button.btn.ghost{background:transparent;border:1.5px solid var(--hairline);color:var(--ink-1);font-weight:500}
-  button.btn.small{padding:9px 16px;font-size:13.5px}
-  .field{margin-bottom:16px}
-  .field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  /* ---------- 数据页 ---------- */
+  .fields2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:14px;font-weight:600;margin-bottom:7px}
   .field label em{font-style:normal;font-weight:400;color:var(--ink-3);font-size:12px}
-  .field input{width:100%;padding:12px 14px;border:1.5px solid var(--hairline);border-radius:11px;font-size:15px;background:var(--card);color:var(--ink-1);outline:none;transition:border-color .15s}
-  .field input:focus{border-color:var(--series-1)}
-  .field .hint{font-size:12px;color:var(--ink-3);margin-top:5px}
-  .verdict{border-left:4px solid var(--series-1);background:var(--tint-1);border-radius:0 12px 12px 0;padding:14px 16px;margin:12px 0}
-  .verdict h3{font-size:16.5px;margin-bottom:3px}
-  .verdict p{font-size:13.5px;color:var(--ink-2)}
-  .sec{margin-top:24px;padding-top:20px;border-top:1px solid var(--hairline)}
-  .sec:first-of-type{margin-top:12px;border-top:none;padding-top:0}
-  .basis-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13.5px;color:var(--ink-2);border-bottom:1px dashed var(--hairline)}
-  .basis-row:last-child{border-bottom:none}
-  .basis-row .q{flex:1}
-  .chip{font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .fwrap{position:relative}
+  .fwrap input{width:100%;padding:13px 74px 13px 15px;border:1.5px solid var(--hairline);border-radius:12px;font-size:16px;background:var(--page-2);color:var(--ink-1);outline:none;transition:border-color .15s;font-variant-numeric:tabular-nums}
+  .fwrap input:focus{border-color:var(--series-1);box-shadow:0 0 0 3px var(--tint-1)}
+  .funit{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px;pointer-events:none}
+  .field .hint{font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.6}
+  /* ---------- 结果页：判定横幅 + 编号分区卡 ---------- */
+  .verdict{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--hairline);border-left:6px solid var(--vc);background:var(--vbg);border-radius:16px;padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .v-ico{font-size:26px;line-height:1.3;flex-shrink:0}
+  .verdict h3{font-size:18px;margin-bottom:4px}
+  .verdict p{font-size:13.5px;color:var(--ink-2);line-height:1.65}
+  .vcard{background:var(--card);border:1px solid var(--hairline);border-radius:18px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;animation:fadein .25s ease}
+  .vcard-head{display:flex;align-items:center;gap:10px;padding:15px 22px;border-bottom:1px solid var(--hairline);background:var(--page-2)}
+  .vcard-num{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--series-1);font-variant-numeric:tabular-nums}
+  .vcard-head h2{font-size:16.5px;margin:0}
+  .h2-ico{margin-right:8px}
+  .vcard-body{padding:20px 22px}
+  .note{font-size:13px;color:var(--ink-2);background:var(--page-2);border:1px solid var(--hairline);border-radius:12px;padding:12px 16px;margin:0 0 16px;line-height:1.7}
+  .note b{color:var(--ink-1)}
+  .basis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+  .basis-card{background:var(--page-2);border:1px solid var(--hairline);border-radius:12px;padding:12px 14px}
+  .bc-q{font-size:12px;color:var(--ink-3);line-height:1.5;min-height:37px}
+  .bc-a{font-size:13.5px;font-weight:600;margin:7px 0 9px}
+  .chip{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
   .chip.lean{color:var(--series-1);background:var(--tint-1)}
-  .chip.attach{color:var(--series-2);background:rgba(235,104,52,.1)}
+  .chip.attach{color:var(--series-2);background:var(--tint-orange)}
   .legend{display:flex;gap:18px;font-size:12px;color:var(--ink-2);margin-bottom:14px;flex-wrap:wrap}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-  .bar-row{display:flex;align-items:center;gap:12px;margin:14px 0}
-  .bar-label{width:130px;font-size:13px;color:var(--ink-2);flex-shrink:0}
-  .bar-track{flex:1;height:10px;background:var(--hairline);border-radius:5px;overflow:hidden}
-  .bar-fill{height:100%;border-radius:5px;min-width:3px;transition:width .4s ease}
-  .bar-val{width:120px;text-align:right;font-size:14.5px;font-weight:800;font-variant-numeric:tabular-nums;flex-shrink:0}
-  .hero{text-align:center;margin:20px 0 6px;padding:18px;background:var(--page);border-radius:14px}
-  .hero .cap{font-size:12.5px;color:var(--ink-2)}
-  .hero .num{font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;margin:4px 0}
-  .hero .sub{font-size:12px;color:var(--ink-3);margin:0}
-  .table-wrap{overflow-x:auto;margin-top:6px}
+  .cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cmp-card{position:relative;overflow:hidden;background:var(--page-2);border:1px solid var(--hairline);border-radius:14px;padding:18px}
+  .cmp-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--acc)}
+  .cmp-name{font-size:14.5px;font-weight:700}
+  .cmp-tag{font-size:11.5px;color:var(--ink-3);margin:2px 0 12px}
+  .cmp-num{font-size:27px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;margin-bottom:10px}
+  .cmp-bar{height:8px;border-radius:4px;background:var(--hairline);overflow:hidden;margin-bottom:10px}
+  .cmp-bar i{display:block;height:100%;border-radius:4px;transition:width .4s ease}
+  .cmp-note{font-size:11.5px;color:var(--ink-3);line-height:1.6}
+  .diff-hero{text-align:center;background:var(--tint-1);border:1px solid var(--hairline);border-radius:14px;padding:18px;margin-top:14px}
+  .diff-cap{font-size:12.5px;color:var(--ink-2)}
+  .diff-num{font-size:34px;font-weight:800;color:var(--series-1);font-variant-numeric:tabular-nums;margin:5px 0 2px}
+  .diff-sub{font-size:12px;color:var(--ink-3)}
+  .table-wrap{overflow-x:auto;margin-top:2px}
   table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:430px}
   th,td{padding:9px 10px;border-bottom:1px solid var(--hairline);text-align:left}
   th{color:var(--ink-2);font-weight:600;font-size:12.5px}
@@ -135,28 +225,47 @@
   ul.paths{margin:4px 0 0}
   ul.paths li{margin:9px 0 9px 2px;font-size:14px;list-style:none;padding-left:24px;position:relative}
   ul.paths li::before{content:"✓";position:absolute;left:0;top:0;color:var(--st-good);font-weight:700}
-  .note{font-size:13px;color:var(--ink-2);background:var(--page);border-radius:10px;padding:11px 14px;margin-top:14px}
-  .note b{color:var(--ink-1)}
-  .risk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--hairline);font-size:13.5px}
-  .risk:last-child{border-bottom:none}
-  .risk .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:7px}
-  .risk .lv{font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;flex-shrink:0;margin-top:2px}
-  .risk .bd b{display:block;color:var(--ink-1);font-size:14px}
-  .risk .bd{color:var(--ink-2)}
-  .redline{border:1.5px solid var(--st-crit);border-radius:14px;padding:16px 18px;margin-bottom:14px;background:rgba(208,59,59,.05)}
+  .risk{display:flex;gap:12px;align-items:flex-start;background:var(--page-2);border:1px solid var(--hairline);border-left:4px solid var(--rv);border-radius:12px;padding:13px 16px;margin:10px 0}
+  .lv{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;border-radius:999px;padding:3px 12px;color:var(--ink-1);background:var(--lvbg);flex-shrink:0;margin-top:1px}
+  .lv i{width:8px;height:8px;border-radius:50%;background:var(--rv)}
+  .risk .bd{font-size:13px;color:var(--ink-2);line-height:1.65}
+  .risk .bd b{display:block;font-size:14.5px;color:var(--ink-1);margin-bottom:2px}
+  .redline{border:1.5px solid var(--st-crit);border-radius:14px;padding:16px 18px;margin-bottom:12px;background:var(--tint-crit)}
   .redline h4{color:var(--st-crit);font-size:14px;margin-bottom:5px}
-  .redline p{font-size:13px;color:var(--ink-2)}
-  .policy{font-size:11.5px;color:var(--ink-3);margin-top:14px;line-height:1.7}
-  .actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-  @media (max-width:560px){
-    h1{font-size:23px}
-    .bar-label{width:96px}.bar-val{width:96px;font-size:13px}
-    .card{padding:18px 16px}
+  .redline p{font-size:13px;color:var(--ink-2);line-height:1.65}
+  .policy{font-size:11.5px;color:var(--ink-3);margin:20px 0 0;line-height:1.7}
+  .actions{display:flex;gap:12px;margin-top:4px;flex-wrap:wrap}
+  /* ---------- 页脚 ---------- */
+  footer.foot{border-top:1px solid var(--hairline);background:var(--page-2);padding:14px 20px;font-size:12px;color:var(--ink-3);text-align:center;line-height:1.7}
+  /* ---------- 响应式 ---------- */
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr 1fr}
+    .policy-strip{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    .hero{padding:46px 18px 40px}
+    .hero h1{font-size:27px}
+    .hero .stats{grid-template-columns:1fr}
+    .steps-h{grid-template-columns:1fr 1fr}
+    .grid{grid-template-columns:1fr}
+    .case-card.manual{grid-column:auto}
+    .policy-strip{grid-template-columns:1fr}
+    .fields2{grid-template-columns:1fr}
+    .cmp-grid{grid-template-columns:1fr}
+    .card{padding:22px 16px}
+    .question{font-size:18px}
+    .band{padding:34px 16px}
+    .vcard-body{padding:16px}
+    .page-pad{padding:20px 14px 56px}
   }
   @media print{
-    .no-print,header.topbar,footer.foot{display:none!important}
+    .no-print,header.topbar,.hero,.band-dark,footer.foot{display:none!important}
     body{background:#fff;color:#000}
-    .card{box-shadow:none;border-color:#ccc}
+    .card,.vcard,.verdict{box-shadow:none;border-color:#999}
+    .vcard-head{background:#eee}
+    .note,.risk,.basis-card,.cmp-card{background:#f6f6f6;border-color:#ccc}
+    .band,.band-tint{background:#fff;padding:16px 0}
+    .page-pad{padding:0}
   }
 </style>
 </head>
@@ -168,7 +277,7 @@
     <span class="badge">模拟数据演示</span>
   </div>
 </header>
-<main class="wrap" id="app"></main>
+<main id="app"></main>
 <footer class="foot">
   免责声明：本工具提供一般性测算与政策提示，不构成税务咨询意见；具体申报请以主管税务机关口径及申报时现行政策为准。所有案例与数据均为模拟数据。
 </footer>
@@ -249,8 +358,25 @@ let current = "home";   /* home | quiz | data | result */
 let qi = 0;
 const $app = document.getElementById("app");
 
-function show(fn){ $app.innerHTML = fn(); window.scrollTo(0,0); }
-function render(){ show(SCREENS[current]); }
+function show(fn){
+  let out;
+  try{ out = fn(); }
+  catch(e){
+    out = `<div class="page-pad"><div class="page-col"><div class="card"><div class="data-head"><span class="sec-ico">⚠️</span><div><h2>页面渲染出错</h2><p class="data-sub">${String(e&&e.message||e)}</p></div></div><button class="btn" onclick="goHome()">返回首页</button></div></div></div>`;
+  }
+  $app.innerHTML = out;
+  window.scrollTo(0,0);
+}
+function render(){
+  show(SCREENS[current]);
+  /* 同步 URL hash：同一屏内换题不产生新历史，换屏才产生——浏览器返回键 = 应用内退一步 */
+  try{
+    if(location.hash !== undefined){
+      const h = "#" + current;
+      if(location.hash !== h) location.hash = h;
+    }
+  }catch(e){}
+}
 
 const SCREENS = {
   home: renderHome,
@@ -260,29 +386,97 @@ const SCREENS = {
 };
 
 /* ---------- 首页 ---------- */
+const CASE_ICO = {streamer:"🎙", designer:"🎨", driver:"🚗", multi:"🏪"};
+const CASE_TAG   = {
+  streamer:["实质经营 · 未登记","var(--st-serious)","var(--tint-serious)"],
+  designer:["劳务报酬","var(--series-1)","var(--tint-1)"],
+  driver:["便民劳务","var(--st-good)","var(--tint-good)"],
+  multi:["已登记 · 有刷单","var(--st-crit)","var(--tint-crit)"]
+};
+const CASE_AMT   = {streamer:"年收入 96 万", designer:"年收入 18 万", driver:"年收入 14.4 万", multi:"年收入 60 万"};
+
 function renderHome(){
-  const cards = CASES.map(c=>`
+  const cards = CASES.map(c=>{
+    const [tag, tcolor, tbg] = CASE_TAG[c.id];
+    return `
     <div class="case-card" onclick="startCase('${c.id}')">
-      <div class="cc-head">${c.name}<span class="cc-arrow">→</span></div>
-      <p>${c.desc}</p>
-    </div>`).join("");
+      <div class="cc-top">
+        <span class="cc-ico">${CASE_ICO[c.id]}</span>
+        <span class="cc-arrow">→</span>
+      </div>
+      <div class="cc-body">
+        <div class="cc-head">${c.name}</div>
+        <p>${c.desc}</p>
+      </div>
+      <div class="cc-meta">
+        <span class="cc-tag" style="color:${tcolor};background:${tbg}">${tag}</span>
+        <span class="cc-amt">${CASE_AMT[c.id]}</span>
+      </div>
+    </div>`;
+  }).join("");
   return `
-  <span class="kicker">2026 平台涉税信息报送新规 · 合规应对</span>
-  <h1>平台已报送你的收入，<br>下一步该怎么申报？</h1>
-  <p class="sub">回答 8 个问题判定收入性质，双路径测算年度税负，得到合规申报路径与风险提示——10 分钟看清自己的税务处境。</p>
-  <div class="stats">
-    <div class="stat"><div class="s-num">≈9,700</div><div class="s-cap">家境内外平台已报送涉税信息</div></div>
-    <div class="stat"><div class="s-num">+37%</div><div class="s-cap">平台内商户申报数量增长</div></div>
-    <div class="stat"><div class="s-num">10 万</div><div class="s-cap">首张平台未报送罚单（元）</div></div>
-  </div>
-  <p class="flow"><b>① 实质判定</b> → <b>② 税负测算</b> → <b>③ 合规路径</b> → <b>④ 风险提示</b></p>
-  <h2>选择演示案例（模拟数据，可修改）</h2>
-  <div class="grid">${cards}
-    <div class="case-card manual" onclick="startManual()">
-      <div class="cc-head">手动开始<span class="cc-arrow">→</span></div>
-      <p>从空白逐题作答，适合现场演示真实使用</p>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-kicker">2026 平台涉税信息报送新规 · 合规应对</span>
+      <h1>平台已报送你的收入，<br>下一步该怎么申报？</h1>
+      <p class="hero-sub">回答 8 个问题判定收入性质，双路径测算年度税负，得到合规申报路径与风险提示——10 分钟看清自己的税务处境。</p>
+      <div class="hero-cta">
+        <button class="btn btn-big" onclick="startManual()">立即开始判定</button>
+        <span class="hero-hint">约 3 分钟 · 无需注册 · 全部为模拟数据</span>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="s-ico">📡</div>
+          <div class="s-num">≈9,700</div>
+          <div class="s-cap">家境内外平台已报送涉税信息</div>
+        </div>
+        <div class="stat">
+          <div class="s-ico">📈</div>
+          <div class="s-num">+37%</div>
+          <div class="s-cap">申报缴税商户数较新规实施前增长</div>
+        </div>
+        <div class="stat">
+          <div class="s-ico">⚖️</div>
+          <div class="s-num">10 万</div>
+          <div class="s-cap">拼多多未报送首张罚单（元）</div>
+        </div>
+      </div>
     </div>
-  </div>`;
+  </section>
+  <section class="band">
+    <div class="band-inner">
+      <div class="band-head"><span class="band-num">01</span><h2>四步看清税务处境</h2></div>
+      <div class="steps-h">
+        <div class="sh"><span class="sh-num">01</span><b>实质判定</b><small>8 问判定收入性质</small></div>
+        <div class="sh"><span class="sh-num">02</span><b>税负测算</b><small>双路径年度税负对比</small></div>
+        <div class="sh"><span class="sh-num">03</span><b>合规路径</b><small>申报身份与操作要点</small></div>
+        <div class="sh"><span class="sh-num">04</span><b>风险提示</b><small>红线拦截与边界提示</small></div>
+      </div>
+    </div>
+  </section>
+  <section class="band band-tint">
+    <div class="band-inner">
+      <div class="band-head"><span class="band-num">02</span><h2>选择演示案例</h2><em>模拟数据 · 点击后可修改</em></div>
+      <div class="grid">${cards}
+        <div class="case-card manual" onclick="startManual()">
+          <div class="cc-top"><span class="cc-ico">✍️</span><span class="cc-arrow">→</span></div>
+          <div class="cc-body"><div class="cc-head">手动开始</div><p>从空白逐题作答，适合现场演示真实使用</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band band-dark">
+    <div class="band-inner">
+      <div class="band-head"><span class="band-num">03</span><h2>记住这几条</h2></div>
+      <div class="policy-strip">
+        <div class="ps"><b>报送新规</b><span>2025 年 6 月公布，2026 年一季度近 9,700 家平台已报送</span></div>
+        <div class="ps"><b>豁免 ≠ 免税</b><span>便民劳务豁免的是报送义务（第四条），不是纳税义务</span></div>
+        <div class="ps"><b>减半优惠</b><span>个体户年所得 ≤200 万部分减半征收（2023 年 12 号公告）</span></div>
+        <div class="ps"><b>小规模免税</b><span>月销售额 10 万以下免征增值税（2026 年 10 号公告）</span></div>
+      </div>
+      <p class="band-foot">本工具提供一般性测算，不构成税务咨询；具体申报以主管税务机关口径及申报时现行政策为准。</p>
+    </div>
+  </section>`;
 }
 
 /* ---------- 开始入口 ---------- */
@@ -310,6 +504,8 @@ function caseBanner(){
 function renderQuiz(){
   const id = quizFlow[qi];
   const q = QUESTIONS.find(x=>x.id===id);
+  const pct = Math.round((qi+1)/quizFlow.length*100);
+  const tagCls = q.tag==="经营实质" ? "tag-orange" : "tag-blue";
   const opts = q.o.map((o,i)=>`
     <button class="opt ${state.ans[id]===o?"sel":""}" onclick="pick('${id}','${o}')">
       <span class="key">${String.fromCharCode(65+i)}</span>
@@ -317,19 +513,25 @@ function renderQuiz(){
       <span class="ck">✓</span>
     </button>`).join("");
   return `
-  ${caseBanner()}
-  <div class="q-head">
-    <span class="q-count">第 ${qi+1} / ${quizFlow.length} 题</span>
-    <div class="pbar"><i style="width:${qi/quizFlow.length*100}%"></i></div>
-  </div>
-  <div class="card">
-    <span class="tag">${q.tag}</span>
-    <div class="question">${q.t}</div>
-    <div class="opts">${opts}</div>
-    <div class="nav">
-      <button class="btn ghost" onclick="prevQ()">上一题</button>
-      <div class="spacer"></div>
-      <button class="btn" ${state.ans[id]?"":"disabled"} onclick="nextQ()">下一题</button>
+  <div class="page-pad">
+    <div class="page-col">
+      ${caseBanner()}
+      <div class="q-head">
+        <span class="q-count">第 ${qi+1} / ${quizFlow.length} 题</span>
+        <div class="pbar"><i style="width:${pct}%"></i></div>
+        <span class="q-pct">${pct}%</span>
+      </div>
+      <div class="card">
+        <span class="tag ${tagCls}">${q.tag}</span>
+        <div class="question">${q.t}</div>
+        <div class="q-tip">💡 结合你与平台、机构的真实合作模式作答</div>
+        <div class="opts">${opts}</div>
+        <div class="nav">
+          <button class="btn ghost" onclick="prevQ()">上一题</button>
+          <div class="spacer"></div>
+          <button class="btn" ${state.ans[id]?"":"disabled"} onclick="nextQ()">下一题</button>
+        </div>
+      </div>
     </div>
   </div>`;
 }
@@ -359,31 +561,41 @@ function goData(){ current="data"; render(); }
 /* ---------- 数据页 ---------- */
 function renderData(){
   return `
-  ${caseBanner()}
-  <div class="card">
-    <span class="tag">数据确认 · 可修改后重新测算</span>
-    <h2>填一下你的收入情况</h2>
-    <div class="field">
-      <label>平台经营 / 接单收入 <em>（元/年）</em></label>
-      <input id="in-income" type="number" min="0" placeholder="例如 960000" value="${state.income??""}" oninput="dataChanged()">
-      <div class="hint">以平台流水或结算单为准，不含刷单等虚假交易</div>
+  <div class="page-pad">
+    <div class="page-col">
+      ${caseBanner()}
+      <div class="rpt-head">
+        <div class="data-head">
+          <span class="sec-ico">✎</span>
+          <div><h2>填一下你的收入情况</h2><p class="data-sub">以平台结算单为准 · 可修改后重新测算</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="fields2">
+          <div class="field">
+            <label>平台经营 / 接单收入</label>
+            <div class="fwrap"><input id="in-income" type="number" min="0" placeholder="例如 960000" value="${state.income??""}" oninput="dataChanged()"><span class="funit">元/年</span></div>
+            <div class="hint">以平台流水或结算单为准，不含刷单等虚假交易</div>
+          </div>
+          <div class="field">
+            <label>经营成本费用 <em>（选填）</em></label>
+            <div class="fwrap"><input id="in-costs" type="number" min="0" placeholder="例如 360000" value="${state.costs??""}"><span class="funit">元/年</span></div>
+            <div class="hint">投流、样品、设备、仓储等与经营直接相关的支出（经营所得路径使用）</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>主业年收入 <em>（选填）</em></label>
+          <div class="fwrap"><input id="in-main" type="number" min="0" placeholder="无主业可留空" value="${state.main||0}"><span class="funit">元</span></div>
+          <div class="hint">有任职受雇单位时填写，用于提示两处以上综合所得汇算义务</div>
+        </div>
+        <div class="nav">
+          <button class="btn ghost" onclick="backFromData()">返回修改答案</button>
+          <div class="spacer"></div>
+          <button class="btn" id="btn-go" onclick="goResult()">生成报告</button>
+        </div>
+        <div class="hint" id="err-msg" style="margin-top:8px;color:var(--st-crit);display:none">请先填写平台收入（大于 0）</div>
+      </div>
     </div>
-    <div class="field">
-      <label>经营成本费用 <em>（元/年，选填）</em></label>
-      <input id="in-costs" type="number" min="0" placeholder="例如 360000" value="${state.costs??""}">
-      <div class="hint">投流、样品、设备、仓储等与经营直接相关的支出（经营所得路径使用）</div>
-    </div>
-    <div class="field">
-      <label>主业年收入 <em>（元，选填）</em></label>
-      <input id="in-main" type="number" min="0" placeholder="无主业可留空" value="${state.main||0}">
-      <div class="hint">有任职受雇单位时填写，用于提示两处以上综合所得汇算义务</div>
-    </div>
-    <div class="nav">
-      <button class="btn ghost" onclick="backFromData()">返回修改答案</button>
-      <div class="spacer"></div>
-      <button class="btn" id="btn-go" onclick="goResult()">生成报告</button>
-    </div>
-    <div class="hint" id="err-msg" style="margin-top:8px;color:var(--st-crit);display:none">请先填写平台收入（大于 0）</div>
   </div>`;
 }
 function dataChanged(){
@@ -400,6 +612,15 @@ function goResult(){
 }
 
 /* ---------- 结果页 ---------- */
+const TONES = {
+  business:["var(--st-good)","var(--tint-good)"],
+  deFacto:["var(--st-serious)","var(--tint-serious)"],
+  labor:["var(--series-1)","var(--tint-1)"],
+  convenience:["var(--series-1)","var(--tint-1)"],
+  wage:["var(--ink-2)","var(--tint-2)"]
+};
+const TONE_ICO = {business:"✅", deFacto:"⚠️", labor:"ℹ️", convenience:"🔖", wage:"💼"};
+
 function renderResult(){
   const t = judge(state.ans);
   if(t==="wage") return resultWage();
@@ -409,57 +630,87 @@ function renderResult(){
 
 function resultWage(){
   return `
-  ${caseBanner()}
-  <div class="card">
-    <div class="verdict">
-      <h3>存在劳动关系 → 工资薪金所得</h3>
-      <p>本工具面向平台内独立经营者；你的收入属于任职受雇所得，由单位按月预扣个税，年度并入综合所得汇算清缴。</p>
+  <div class="page-pad">
+    <div class="page-col">
+      ${caseBanner()}
+      <div class="rpt-head">
+        <div class="data-head"><span class="sec-ico">📋</span><div><h2>你的合规申报报告</h2><p class="data-sub">基于你的作答生成</p></div></div>
+      </div>
+      <div class="verdict" style="--vc:var(--ink-2);--vbg:var(--tint-2)">
+        <span class="v-ico">💼</span>
+        <div>
+          <h3>存在劳动关系 → 工资薪金所得</h3>
+          <p>本工具面向平台内独立经营者；你的收入属于任职受雇所得，由单位按月预扣个税，年度并入综合所得汇算清缴。</p>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">01</span><h2><span class="h2-ico">🗺️</span>接下来怎么做</h2></div>
+        <div class="vcard-body">
+          <ul class="paths">
+            <li>核对单位的代扣记录；</li>
+            <li>年度汇算清缴期间（次年 3 月 1 日至 6 月 30 日）通过个税 APP 办理。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="actions no-print">
+        <button class="btn" onclick="startManual()">重新测算</button>
+        <button class="btn ghost" onclick="goHome()">返回首页</button>
+      </div>
     </div>
-    <ul class="paths">
-      <li>核对单位的代扣记录；</li>
-      <li>年度汇算清缴期间（次年 3 月 1 日至 6 月 30 日）通过个税 APP 办理。</li>
-    </ul>
-  </div>
-  <div class="actions no-print">
-    <button class="btn" onclick="startManual()">重新测算</button>
-    <button class="btn ghost" onclick="goHome()">返回首页</button>
   </div>`;
 }
 
 function resultConvenience(){
   const lab = calcLabor(state.income);
   return `
-  ${caseBanner()}
-  <div class="card">
-    <div class="verdict">
-      <h3>便民劳务 → 豁免报送 ≠ 免税</h3>
-      <p>从事配送、运输、家政等便民劳务活动的人员，平台无需向税务机关报送其收入信息（《报送规定》第四条）；但收入仍应依法申报纳税。</p>
+  <div class="page-pad">
+    <div class="page-col">
+      ${caseBanner()}
+      <div class="rpt-head">
+        <div class="data-head"><span class="sec-ico">📋</span><div><h2>你的合规申报报告</h2><p class="data-sub">基于你的作答与数据生成 · 简化估算</p></div></div>
+      </div>
+      <div class="verdict" style="--vc:var(--series-1);--vbg:var(--tint-1)">
+        <span class="v-ico">🔖</span>
+        <div>
+          <h3>便民劳务 → 豁免报送 ≠ 免税</h3>
+          <p>从事配送、运输、家政等便民劳务活动的人员，平台无需向税务机关报送其收入信息（《报送规定》第四条）；但收入仍应依法申报纳税。</p>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">01</span><h2><span class="h2-ico">🗺️</span>合规申报路径</h2></div>
+        <div class="vcard-body">
+          <ul class="paths">
+            <li>核对平台的代扣代缴记录（多数按劳务报酬预扣）；</li>
+            <li>年度并入综合所得办理汇算；</li>
+            <li>留存购车、油费、维修等与营运相关的支出凭证，扣除口径以主管税务机关为准。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">02</span><h2><span class="h2-ico">🧮</span>税负测算（劳务报酬口径，简化估算）</h2></div>
+        <div class="vcard-body">
+          <div class="table-wrap"><table>
+            <tr><th>项目</th><th class="num">金额</th></tr>
+            <tr><td>收入额（扣除 20% 费用）</td><td class="num">${fmt(lab.net)}</td></tr>
+            <tr><td>减除基本费用后应纳税所得额</td><td class="num">${fmt(lab.taxable)}</td></tr>
+            <tr><td>年度个税（简化估算）</td><td class="num">${fmt(lab.tax)}</td></tr>
+          </table></div>
+          <div class="note">劳务报酬路径的增值税以平台/支付方扣缴记录为准，本工具不单独测算。</div>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">03</span><h2><span class="h2-ico">⚠️</span>风险提示</h2></div>
+        <div class="vcard-body">
+          ${riskItems([
+            ["good","豁免报送","你的活动属于便民劳务，平台无需报送你的收入信息（《报送规定》第四条）——但豁免的是报送义务，不是纳税义务。"],
+            ["warn","口径差异","平台已代扣的，以扣缴记录为准；自担车辆/耗材等成本能否扣除存在口径差异，以主管税务机关口径为准。"]
+          ])}
+        </div>
+      </div>
+      <div class="policy">政策依据：《互联网平台企业涉税信息报送规定》（2025 年 6 月公布）；《个人所得税法》及实施条例。</div>
+      ${printActions()}
     </div>
-    <div class="sec"><h2>合规申报路径</h2>
-      <ul class="paths">
-        <li>核对平台的代扣代缴记录（多数按劳务报酬预扣）；</li>
-        <li>年度并入综合所得办理汇算；</li>
-        <li>留存购车、油费、维修等与营运相关的支出凭证，扣除口径以主管税务机关为准。</li>
-      </ul>
-    </div>
-    <div class="sec"><h2>税负测算（劳务报酬口径，简化估算）</h2>
-      <div class="table-wrap"><table>
-        <tr><th>项目</th><th class="num">金额</th></tr>
-        <tr><td>收入额（扣除 20% 费用）</td><td class="num">${fmt(lab.net)}</td></tr>
-        <tr><td>减除基本费用后应纳税所得额</td><td class="num">${fmt(lab.taxable)}</td></tr>
-        <tr><td>年度个税（简化估算）</td><td class="num">${fmt(lab.tax)}</td></tr>
-      </table></div>
-      <div class="note">劳务报酬路径的增值税以平台/支付方扣缴记录为准，本工具不单独测算。</div>
-    </div>
-    <div class="sec"><h2>风险提示</h2>
-      ${riskItems([
-        ["good","豁免报送","你的活动属于便民劳务，平台无需报送你的收入信息（《报送规定》第四条）——但豁免的是报送义务，不是纳税义务。"],
-        ["warn","口径差异","平台已代扣的，以扣缴记录为准；自担车辆/耗材等成本能否扣除存在口径差异，以主管税务机关口径为准。"]
-      ])}
-    </div>
-    <div class="policy">政策依据：《互联网平台企业涉税信息报送规定》（2025 年 6 月公布）；《个人所得税法》及实施条例。</div>
-  </div>
-  ${printActions()}`;
+  </div>`;
 }
 
 function resultDual(t){
@@ -480,8 +731,9 @@ function resultDual(t){
   }[t];
 
   const basis = basisList(state.ans).map(b=>`
-    <div class="basis-row">
-      <span class="q">${b.q}——答「${b.a}」</span>
+    <div class="basis-card">
+      <div class="bc-q">${b.q}</div>
+      <div class="bc-a">答「${b.a}」</div>
       <span class="chip ${b.lean?"lean":"attach"}">${b.lean?"经营倾向":"依附倾向"}</span>
     </div>`).join("");
 
@@ -514,63 +766,91 @@ function resultDual(t){
     <div class="note"><b>两处以上所得提示：</b>你另有主业年收入 ${fmt(state.main)}。根据《个人所得税法实施条例》第二十五条，从两处以上取得综合所得且年收入额减除专项扣除后超过 6 万元的，需要办理年度汇算清缴。${bizPrimary?"经营所得与综合所得分别计税、分别申报。":"平台收入应并入综合所得申报。"}</div>` : "";
 
   return `
-  ${caseBanner()}
-  <div class="card">
-    <span class="tag">你的合规申报报告</span>
-    <div class="verdict">
-      <h3>${verdict[0]}</h3>
-      <p>${verdict[1]}</p>
-    </div>
-    ${(state.flags.includes("live") || !state.caseId) ? `<div class="note">直播提示：网络主播以个人名义取得的分成，多数情形按劳务报酬处理；以登记主体（工作室）名义签约并按经营实质运营的，按经营所得处理（税务所得发〔2022〕25 号口径）。</div>` : ""}
-    <div class="sec"><h2>判定依据</h2>${basis}</div>
-    <div class="sec"><h2>双路径税负对比（年度）</h2>
-      <div class="legend">
-        <span><i style="background:var(--series-1)"></i>经营所得路径（个体户查账，含减半优惠）</span>
-        <span><i style="background:var(--series-2)"></i>劳务报酬路径（并入综合所得）</span>
+  <div class="page-pad">
+    <div class="page-col">
+      ${caseBanner()}
+      <div class="rpt-head">
+        <div class="data-head"><span class="sec-ico">📋</span><div><h2>你的合规申报报告</h2><p class="data-sub">基于你的作答与数据生成 · 简化估算</p></div></div>
       </div>
-      <div class="bar-row">
-        <div class="bar-label">经营所得路径</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${bizTotal/max*100}%;background:var(--series-1)"></div></div>
-        <div class="bar-val">${fmt(bizTotal)}</div>
+      <div class="verdict" style="--vc:${TONES[t][0]};--vbg:${TONES[t][1]}">
+        <span class="v-ico">${TONE_ICO[t]}</span>
+        <div>
+          <h3>${verdict[0]}</h3>
+          <p>${verdict[1]}</p>
+        </div>
       </div>
-      <div class="bar-row">
-        <div class="bar-label">劳务报酬路径</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${labTotal/max*100}%;background:var(--series-2)"></div></div>
-        <div class="bar-val">${fmt(labTotal)}</div>
+      ${(state.flags.includes("live") || !state.caseId) ? `<div class="note">直播提示：网络主播以个人名义取得的分成，多数情形按劳务报酬处理；以登记主体（工作室）名义签约并按经营实质运营的，按经营所得处理（税务所得发〔2022〕25 号口径）。</div>` : ""}
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">01</span><h2><span class="h2-ico">🧾</span>判定依据</h2></div>
+        <div class="vcard-body"><div class="basis-grid">${basis}</div></div>
       </div>
-      <div class="hero">
-        <div class="cap">两路径年度税负差额（较低者为「${lower}」）</div>
-        <div class="num">${fmt(diff)}</div>
-        <div class="sub">正确判定收入性质、选择合规申报路径，差别一目了然</div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">02</span><h2><span class="h2-ico">📊</span>双路径税负对比（年度）</h2></div>
+        <div class="vcard-body">
+          <div class="legend">
+            <span><i style="background:var(--series-1)"></i>经营所得路径（个体户查账，含减半优惠）</span>
+            <span><i style="background:var(--series-2)"></i>劳务报酬路径（并入综合所得）</span>
+          </div>
+          <div class="cmp-grid">
+            <div class="cmp-card" style="--acc:var(--series-1)">
+              <div class="cmp-name">经营所得路径</div>
+              <div class="cmp-tag">个体户查账 · 含 ≤200 万减半</div>
+              <div class="cmp-num">${fmt(bizTotal)}</div>
+              <div class="cmp-bar"><i style="width:${bizTotal/max*100}%;background:var(--acc)"></i></div>
+              <div class="cmp-note">个税 ${fmt(biz.tax)} · 增值税 ${vat.exempt?"免征":fmt(vat.vat)} · 附加 ${vat.sur?fmt(vat.sur):"0 元"}</div>
+            </div>
+            <div class="cmp-card" style="--acc:var(--series-2)">
+              <div class="cmp-name">劳务报酬路径</div>
+              <div class="cmp-tag">并入综合所得汇算</div>
+              <div class="cmp-num">${fmt(labTotal)}</div>
+              <div class="cmp-bar"><i style="width:${labTotal/max*100}%;background:var(--acc)"></i></div>
+              <div class="cmp-note">个税 ${fmt(lab.tax)} · 增值税以扣缴记录为准</div>
+            </div>
+          </div>
+          <div class="diff-hero">
+            <div class="diff-cap">两路径年度税负差额（较低者为「${lower}」）</div>
+            <div class="diff-num">${fmt(diff)}</div>
+            <div class="diff-sub">正确判定收入性质、选择合规申报路径，差别一目了然</div>
+          </div>
+        </div>
       </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">03</span><h2><span class="h2-ico">🧮</span>测算明细</h2></div>
+        <div class="vcard-body">
+          <div class="table-wrap"><table>
+            <tr><th>项目</th><th class="num">经营所得路径</th><th class="num">劳务报酬路径</th></tr>
+            <tr><td>计税基础</td><td class="num">应税所得 ${fmt(biz.taxable)}</td><td class="num">收入额 ${fmt(lab.net)}</td></tr>
+            <tr><td>个税</td><td class="num">${fmt(biz.tax)}<div class="minor">含 ≤200 万部分减半优惠 ${fmt(biz.relief)}</div></td><td class="num">${fmt(lab.tax)}</td></tr>
+            <tr><td>增值税</td><td class="num">${vat.exempt?"免征<span class='minor' style='display:block'>月均未超 10 万</span>":fmt(vat.vat)}</td><td class="num" style="color:var(--ink-3)">以扣缴记录为准</td></tr>
+            <tr><td>附加税费</td><td class="num">${vat.sur?fmt(vat.sur):"0 元"}</td><td class="num" style="color:var(--ink-3)">—</td></tr>
+            <tr><td>合计</td><td class="num">${fmt(bizTotal)}</td><td class="num">${fmt(labTotal)}</td></tr>
+          </table></div>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">04</span><h2><span class="h2-ico">🗺️</span>合规申报路径</h2></div>
+        <div class="vcard-body">
+          <ul class="paths">${paths.map(p=>`<li>${p}</li>`).join("")}</ul>
+          ${mainNote}
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vcard-head"><span class="vcard-num">05</span><h2><span class="h2-ico">⚠️</span>风险提示</h2></div>
+        <div class="vcard-body">${riskItems(risks)}</div>
+      </div>
+      <div class="policy">政策依据：《互联网平台企业涉税信息报送规定》；《个人所得税法》及实施条例第二十五条；财政部 税务总局公告 2023 年第 12 号、第 19 号、2026 年第 10 号；财政部 税务总局公告 2021 年第 41 号；税务所得发〔2022〕25 号。</div>
+      ${printActions()}
     </div>
-    <div class="sec"><h2>测算明细</h2>
-      <div class="table-wrap"><table>
-        <tr><th>项目</th><th class="num">经营所得路径</th><th class="num">劳务报酬路径</th></tr>
-        <tr><td>计税基础</td><td class="num">应税所得 ${fmt(biz.taxable)}</td><td class="num">收入额 ${fmt(lab.net)}</td></tr>
-        <tr><td>个税</td><td class="num">${fmt(biz.tax)}<div class="minor">含 ≤200 万部分减半优惠 ${fmt(biz.relief)}</div></td><td class="num">${fmt(lab.tax)}</td></tr>
-        <tr><td>增值税</td><td class="num">${vat.exempt?"免征<span class='minor' style='display:block'>月均未超 10 万</span>":fmt(vat.vat)}</td><td class="num" style="color:var(--ink-3)">以扣缴记录为准</td></tr>
-        <tr><td>附加税费</td><td class="num">${vat.sur?fmt(vat.sur):"0 元"}</td><td class="num" style="color:var(--ink-3)">—</td></tr>
-        <tr><td>合计</td><td class="num">${fmt(bizTotal)}</td><td class="num">${fmt(labTotal)}</td></tr>
-      </table></div>
-    </div>
-    <div class="sec"><h2>合规申报路径</h2>
-      <ul class="paths">${paths.map(p=>`<li>${p}</li>`).join("")}</ul>
-      ${mainNote}
-    </div>
-    <div class="sec"><h2>风险提示</h2>${riskItems(risks)}</div>
-    <div class="policy">政策依据：《互联网平台企业涉税信息报送规定》；《个人所得税法》及实施条例第二十五条；财政部 税务总局公告 2023 年第 12 号、第 19 号、2026 年第 10 号；财政部 税务总局公告 2021 年第 41 号；税务所得发〔2022〕25 号。</div>
-  </div>
-  ${printActions()}`;
+  </div>`;
 }
 
 function riskItems(items){
   const colors = {good:"var(--st-good)",warn:"var(--st-warn)",serious:"var(--st-serious)",crit:"var(--st-crit)"};
+  const tints  = {good:"var(--tint-good)",warn:"var(--tint-warn)",serious:"var(--tint-serious)",crit:"var(--tint-crit)"};
   const labels = {good:"低",warn:"中",serious:"高",crit:"红线"};
   const body = items.map(([lv,title,desc])=>`
-    <div class="risk">
-      <span class="dot" style="background:${colors[lv]}"></span>
-      <span class="lv" style="color:${colors[lv]};background:${lv==="warn"?"rgba(250,178,25,.12)":colors[lv]+"1a"}">${labels[lv]}</span>
+    <div class="risk" style="--rv:${colors[lv]};--lvbg:${tints[lv]}">
+      <span class="lv"><i></i>${labels[lv]}</span>
       <span class="bd"><b>${title}</b>${desc}</span>
     </div>`).join("");
   return `
@@ -586,6 +866,22 @@ function printActions(){
     <button class="btn ghost" onclick="current='data';render()">修改数据</button>
     <button class="btn ghost" onclick="startManual()">重新测算</button>
   </div>`;
+}
+
+/* ==================== 浏览器返回键（hash 路由） ==================== */
+if(window.addEventListener && location.hash !== undefined){
+  /* 刷新带旧 hash 时清掉（状态不持久化，从头开始） */
+  if(location.hash){
+    try{ if(history && history.replaceState) history.replaceState(null, "", location.pathname + location.search); else location.hash = ""; }catch(e){}
+  }
+  window.addEventListener("hashchange", function(){
+    const h = (location.hash || "").replace("#","");
+    if(h && SCREENS[h] && h !== current){
+      if(h === "quiz") qi = Math.min(qi, quizFlow.length - 1); /* 答完 8 题后 qi=8，回问询页需钳制到最后一道题 */
+      current = h; render();
+    }
+    else if(!h && current !== "home"){ current = "home"; render(); }
+  });
 }
 
 /* ==================== 启动 ==================== */
