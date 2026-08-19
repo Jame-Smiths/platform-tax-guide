@@ -91,11 +91,11 @@
   button.btn-big{background:#fff;color:var(--navy-1);padding:14px 32px;font-size:16px;font-weight:700;border-radius:13px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
   button.btn-big:hover:not(:disabled){transform:translateY(-1px);filter:none}
   .hero-hint{font-size:12.5px;color:rgba(255,255,255,.62)}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px;max-width:780px}
-  .stat{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:15px;padding:15px 18px}
-  .s-ico{font-size:22px;line-height:1}
-  .s-num{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff;line-height:1.2}
-  .s-cap{font-size:12px;color:rgba(255,255,255,.66);line-height:1.5}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stat{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--hairline);border-radius:15px;padding:16px 18px;box-shadow:var(--shadow)}
+  .s-ico{width:42px;height:42px;border-radius:12px;background:var(--tint-1);font-size:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .s-num{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+  .s-cap{font-size:12px;color:var(--ink-2);line-height:1.5}
   /* ---------- 分区横带 ---------- */
   .band{padding:46px 20px;background:var(--page)}
   .band-tint{background:var(--page-2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
@@ -127,10 +127,8 @@
   .cc-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--hairline)}
   .cc-tag{font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
   .cc-amt{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
-  .case-card.manual{grid-column:1/-1;border:1.5px dashed var(--hairline);background:transparent;box-shadow:none;flex-direction:row;align-items:center;gap:16px}
-  .case-card.manual:hover{border-color:var(--series-1);background:var(--card)}
-  .case-card.manual .cc-body{flex:1}
-  .case-card.manual .cc-body p{margin-top:2px}
+  .case-foot{font-size:13px;color:var(--ink-3);margin-top:16px}
+  .case-foot a{cursor:pointer;font-weight:600}
   /* ---------- 政策要点带（深色） ---------- */
   .policy-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .ps{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:15px 16px}
@@ -245,10 +243,9 @@
   @media (max-width:640px){
     .hero{padding:46px 18px 40px}
     .hero h1{font-size:27px}
-    .hero .stats{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr}
     .steps-h{grid-template-columns:1fr 1fr}
     .grid{grid-template-columns:1fr}
-    .case-card.manual{grid-column:auto}
     .policy-strip{grid-template-columns:1fr}
     .fields2{grid-template-columns:1fr}
     .cmp-grid{grid-template-columns:1fr}
@@ -419,33 +416,35 @@ function renderHome(){
     <div class="hero-inner">
       <span class="hero-kicker">2026 平台涉税信息报送新规 · 合规应对</span>
       <h1>平台已报送你的收入，<br>下一步该怎么申报？</h1>
-      <p class="hero-sub">回答 8 个问题判定收入性质，双路径测算年度税负，得到合规申报路径与风险提示——10 分钟看清自己的税务处境。</p>
+      <p class="hero-sub">回答 8 个问题判定收入性质，双路径测算年度税负，得到合规申报路径与风险提示——几分钟看清自己的税务处境。</p>
       <div class="hero-cta">
         <button class="btn btn-big" onclick="startManual()">立即开始判定</button>
         <span class="hero-hint">约 3 分钟 · 无需注册 · 全部为模拟数据</span>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <div class="s-ico">📡</div>
-          <div class="s-num">≈9,700</div>
-          <div class="s-cap">家境内外平台已报送涉税信息</div>
-        </div>
-        <div class="stat">
-          <div class="s-ico">📈</div>
-          <div class="s-num">+37%</div>
-          <div class="s-cap">申报缴税商户数较新规实施前增长</div>
-        </div>
-        <div class="stat">
-          <div class="s-ico">⚖️</div>
-          <div class="s-num">10 万</div>
-          <div class="s-cap">拼多多未报送首张罚单（元）</div>
-        </div>
       </div>
     </div>
   </section>
   <section class="band">
     <div class="band-inner">
-      <div class="band-head"><span class="band-num">01</span><h2>四步看清税务处境</h2></div>
+      <div class="band-head"><span class="band-num">01</span><h2>三个数字看懂新规</h2></div>
+      <div class="stats">
+        <div class="stat">
+          <div class="s-ico">📡</div>
+          <div><div class="s-num">≈9,700 家</div><div class="s-cap">境内外平台已报送涉税信息</div></div>
+        </div>
+        <div class="stat">
+          <div class="s-ico">📈</div>
+          <div><div class="s-num">+37%</div><div class="s-cap">申报缴税商户数较新规实施前增长</div></div>
+        </div>
+        <div class="stat">
+          <div class="s-ico">⚖️</div>
+          <div><div class="s-num">10 万</div><div class="s-cap">拼多多未履行报送义务被罚（元）</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band band-tint">
+    <div class="band-inner">
+      <div class="band-head"><span class="band-num">02</span><h2>四步看清税务处境</h2></div>
       <div class="steps-h">
         <div class="sh"><span class="sh-num">01</span><b>实质判定</b><small>8 问判定收入性质</small></div>
         <div class="sh"><span class="sh-num">02</span><b>税负测算</b><small>双路径年度税负对比</small></div>
@@ -454,20 +453,16 @@ function renderHome(){
       </div>
     </div>
   </section>
-  <section class="band band-tint">
+  <section class="band">
     <div class="band-inner">
-      <div class="band-head"><span class="band-num">02</span><h2>选择演示案例</h2><em>模拟数据 · 点击后可修改</em></div>
-      <div class="grid">${cards}
-        <div class="case-card manual" onclick="startManual()">
-          <div class="cc-top"><span class="cc-ico">✍️</span><span class="cc-arrow">→</span></div>
-          <div class="cc-body"><div class="cc-head">手动开始</div><p>从空白逐题作答，适合现场演示真实使用</p></div>
-        </div>
-      </div>
+      <div class="band-head"><span class="band-num">03</span><h2>选择演示案例</h2><em>四个典型场景 · 点击查看判定与测算</em></div>
+      <div class="grid">${cards}</div>
+      <p class="case-foot">想看自己情况的判定？<a onclick="startManual()">点击这里从空白逐题开始 →</a></p>
     </div>
   </section>
   <section class="band band-dark">
     <div class="band-inner">
-      <div class="band-head"><span class="band-num">03</span><h2>记住这几条</h2></div>
+      <div class="band-head"><span class="band-num">04</span><h2>记住这几条</h2></div>
       <div class="policy-strip">
         <div class="ps"><b>报送新规</b><span>2025 年 6 月公布，2026 年一季度近 9,700 家平台已报送</span></div>
         <div class="ps"><b>豁免 ≠ 免税</b><span>便民劳务豁免的是报送义务（第四条），不是纳税义务</span></div>
