@@ -22,12 +22,6 @@
     padding-bottom: 6px; border-bottom: 1pt solid #d9d9d9;
   }
   h3 { font-size: 11.5pt; font-weight: 700; margin: 17px 0 4px; }
-  .dim {
-    display: inline-block; font-size: 8.5pt; color: #555; font-weight: 600;
-    border: 0.8pt solid #c9c9c9; border-radius: 9pt; padding: 0 6pt;
-    margin-left: 8px; vertical-align: 2pt;
-  }
-  .dims-note { color: #555; font-size: 9.5pt; margin: 0 0 6px; }
   .interaction { break-inside: avoid; page-break-inside: avoid; margin-bottom: 4px; }
   .field { margin: 1px 0; }
   .label {
@@ -51,14 +45,13 @@
   <b>项目：</b>平台报税向导（平台报送新规下，个体经营者的合规申报应对器）<br>
   <b>协作模式：</b>参赛者主导需求与财税专业审查，AI Coding 智能体负责调研、设计、编码与自测<br>
   <b>工具链：</b>Claude Code（AI Coding 智能体，对话式开发）+ Node 自测脚本 + 人工专业对账<br>
-  <b>说明：</b>以下 14 次关键交互均取自开发全程真实记录，按「提示词 / AI 输出核心内容 / 采纳或修改的决策理由 / 人工调整部分」四要素整理，并标注所体现的参赛维度。
+  <b>说明：</b>以下 14 次关键交互均取自开发全程真实记录，按「提示词 / AI 输出核心内容 / 采纳或修改的决策理由 / 人工调整部分」四要素整理。
 </div>
 
 <h2>一、关键交互记录</h2>
-<p class="dims-note">14 条交互覆盖三大维度：财税专业能力 7 条、AI 协作能力 3 条、产品化思维 4 条。</p>
 
 <div class="interaction">
-  <h3>交互 1｜选题定夺<span class="dim">财税专业能力</span></h3>
+  <h3>交互 1｜选题定夺</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「结合近年稽查热点，找一个精准的 AI 提效场景，避开老旧案例」「创新性第一，思考痕迹比代码量重要，公网部署可体验比精致视频重要，用财税专业补齐 AI 短板」「确认选题不与往届获奖作品雷同」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">调研 2025–2026 年稽查热点（开票经济整治、平台涉税信息报送规定、支柱二），先提支柱二测算器；随后按参赛主张改提「平台报送新规·个体经营者合规应对器」；检索往届个人赛道获奖作品（律所税务智能体、新能源汽车、跨境电商财税模型）确认无雷同</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">放弃支柱二——与官方示例同题，创新性吃亏；采纳新题——痛点由 2025 年《互联网平台企业涉税信息报送规定》落地产生，2024 年之前不存在，与官方示例「灵活用工个税测算」形成差异</span></div>
@@ -66,7 +59,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 2｜三大专业判断定夺<span class="dim">财税专业能力</span></h3>
+  <h3>交互 2｜三大专业判断定夺</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「核定征收能不能算？便民劳务怎么处理？混合收入怎么办？给出方案」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">逐项给出 A/B 两套方案并解释税务逻辑</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">全部采纳 A 方案——核定征收只提示不测算（虚假核定是官方点名打击行为，提供测算涉嫌教唆，属一票否决风险）；便民劳务按劳务报酬测算＋双提示（豁免报送 ≠ 免税）；混合收入只做「两处以上取得综合所得需汇算」轻量提示</span></div>
@@ -74,7 +67,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 3｜政策口径逐条核对<span class="dim">财税专业能力</span></h3>
+  <h3>交互 3｜政策口径逐条核对</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「整理政策清单，我来逐条核对」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">整理 13 项政策口径清单（报送规定、税率表、减半优惠、起征点、文号等）供核对</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">人工核给 4 项关键口径——《规定》2025 年 6 月公布、直播收入性质依据税务所得发〔2022〕25 号、两处以上汇算依据个税实施条例第二十五条、便民劳务豁免位于《报送规定》第四条；以人工核对结果为准</span></div>
@@ -82,7 +75,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 4｜产品定义与原型开发<span class="dim">AI 协作能力</span></h3>
+  <h3>交互 4｜产品定义与原型开发</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「按需求基线开发可运行原型：Q1–Q8 判定问询、双路径税负测算、风险分级提示、4 个预置案例」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">实现单文件 HTML 原型——Q1–Q8 问询与判定树引擎（三条分流）、劳务报酬/经营所得双路径税负测算（个税＋增值税＋附加）、风险分级提示、4 个预置案例</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">需求基线（问询范围、测算口径、案例场景）由人工先行定义，AI 按基线一次生成通过，原型结构全盘采纳</span></div>
@@ -90,7 +83,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 5｜AI 政策自查：≤200 万减半缺失<span class="dim">AI 协作能力</span></h3>
+  <h3>交互 5｜AI 政策自查：≤200 万减半缺失</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「自查一遍有没有政策遗漏」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">复查发现个体户年应纳税所得额 ≤200 万部分减半征收个税（2023 年第 12 号公告）在引擎中缺失——属一票否决级错误；实现减半公式并处理 &gt;200 万边界</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">采纳修复——该政策此前已在政策清单中经人工确认，AI 自查与人工确认形成双向闭环</span></div>
@@ -98,7 +91,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 6｜案例手算对账<span class="dim">财税专业能力</span></h3>
+  <h3>交互 6｜案例手算对账</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「对案例 1 引擎结果做人工复核，我手算一遍」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">引擎输出案例 1（年佣金 96 万、成本 36 万）双路径结果：劳务报酬 161,880 元 / 经营所得 72,250 元 / 差额 89,630 元</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">人工手算与引擎输出完全一致，数字采纳；差额 89,630 元成为产品核心演示点</span></div>
@@ -106,7 +99,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 7｜可用性验收与 v1.1 整改<span class="dim">产品化思维</span></h3>
+  <h3>交互 7｜可用性验收与 v1.1 整改</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「对 v0.1 做可用性验收：界面信息层级、内容完整性、返回机制、异常输入处理，按问题清单整改」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">v1.1 整改——首页信息重排、确定性状态机导航（修复便民劳务返回死循环）、数据校验防空报告、直播提示按场景限定；附 50 项自测断言全过</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">验收意见全部采纳；返回死循环属真实缺陷，必须修复；「判定逻辑与界面解耦」的产品结构自此确立</span></div>
@@ -114,7 +107,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 8｜专业审查三事项终审<span class="dim">财税专业能力</span></h3>
+  <h3>交互 8｜专业审查三事项终审</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「复核三件事：判定阈值边界、案例 2–4 对账数字、直播意见文号」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">引擎实测数字与阈值边界场景（经营倾向 0–5 项全扫描）</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">人工终审通过——案例数字无算错、阈值维持 ≥3/5 不调、文号税务所得发〔2022〕25 号正确</span></div>
@@ -122,7 +115,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 9｜43 项测试用例与 A-06 复核<span class="dim">AI 协作能力</span></h3>
+  <h3>交互 9｜43 项测试用例与 A-06 复核</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「生成测试用例，覆盖边界值」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">按边界值分析自动生成 43 项用例（个税七档/五档全边界、月 10 万免征临界、200 万减半临界、判定阈值 0–5 全扫描、状态机回归、异常输入）并编写执行脚本</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">执行发现 A-06 用例期望值错用速算扣除数；人工复核税率表确认引擎正确（144,800 已跨入 20% 档），修正的是测试期望值——人工复核为最终裁判</span></div>
@@ -130,7 +123,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 10｜公网部署可体验<span class="dim">产品化思维</span></h3>
+  <h3>交互 10｜公网部署可体验</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「产品需公网可访问、评委可直接体验，并建立后续更新通道」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">排查网络通道、指导创建仓库并开启 GitHub Pages；接通本地推送通道（本地修改 → 推送即上线）</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">部署前人工发现原账号信息不符合公开要求，更换全新公网账号完成部署；站点上线后核验线上文件与本地逐字节一致</span></div>
@@ -138,7 +131,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 11｜数据口径核实<span class="dim">财税专业能力</span></h3>
+  <h3>交互 11｜数据口径核实</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「首页 9,700 家 / +37% 这两个数含义和出处是什么？」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">查证出处为国新办 2026-07-28 发布会（税务总局荣海楼通报《规定》落地一周年成效）；发现首页 +37% 措辞不精确，应为「申报缴税商户数较新规实施前增长」</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">采纳修正——答辩引用需要准确出处，口径以官方通报为准</span></div>
@@ -146,7 +139,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 12｜视觉迭代与路由缺陷修复<span class="dim">产品化思维</span></h3>
+  <h3>交互 12｜视觉迭代与路由缺陷修复</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「按产品视觉标准三轮验收：信息架构与分区、模块层级与配色、浏览器返回键链路」「返回键退出后白屏，需修复」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">v1.2 双栏工作台；定位并修复「浏览器返回键无历史导致白屏」问题，实现 hash 路由（换屏写 #hash、hashchange 监听换屏、渲染错误兜底）；v1.3 四段式分区色带与结果页重排，计算引擎与状态机零改动；50 项断言＋43 项用例＋真实浏览器冒烟全过</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">三轮意见全部采纳；视觉以人工验收为准，引擎与判定逻辑零改动——「专业逻辑稳定、界面持续迭代」</span></div>
@@ -154,7 +147,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 13｜数据点合规修订<span class="dim">财税专业能力</span></h3>
+  <h3>交互 13｜数据点合规修订</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「首页数据点出现具体企业名，且金额缺乏威慑力、与刷单红线对应关系弱，替换为同口径官方数据」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">将原罚单数据点全链替换为同场发布会通报的「查处操控 1.2 万个账号刷单案」，同步更新规则基线、PPT 素材与网站首页数据条</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">采纳——不出现具体企业名（规避合规与舆情风险），数据规模更大，且与「刷单炒信」红线直接呼应</span></div>
@@ -162,7 +155,7 @@
 </div>
 
 <div class="interaction">
-  <h3>交互 14｜Workspace 交付工程化<span class="dim">产品化思维</span></h3>
+  <h3>交互 14｜Workspace 交付工程化</h3>
   <div class="field"><span class="label">提示词（摘录）</span><span class="text">「提交材料按工程文件、代码、脚本三类组织；过程文档与个人信息不入库，做盲审安全自查」</span></div>
   <div class="field"><span class="label">AI 输出核心内容</span><span class="text">Workspace 最终定为 6 个文件——工程文件（需求与规则基线、测试用例与结果）、代码（index.html）、脚本（自测脚本、边界值用例脚本）、工程说明（README）；同步核对快照与开发目录逐字节一致</span></div>
   <div class="field"><span class="label">采纳/修改决策理由</span><span class="text">采纳——提交材料盲审安全，只保留工程内容，评审可完整复现产品</span></div>
